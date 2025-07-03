@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon Scraper</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Amazon Scraper (Frontend + n8n)</h2>
+    <form method="POST">
+      <input type="text" name="product_url" placeholder="Paste Amazon product/search/category URL" required>
+      <button type="submit">Scrape</button>
+    </form>
+
+    {% if result %}
+      <h3>Output:</h3>
+      <pre>{{ result | tojson(indent=2) }}</pre>
+      <a href="data:application/json,{{ result | tojson }}" download="product.json">⬇️ Download JSON</a>
+    {% endif %}
+  </div>
+</body>
+</html>
