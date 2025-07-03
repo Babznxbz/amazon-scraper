@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-N8N_WEBHOOK_URL = "https://add011111.app.n8n.cloud/webhook-test/e116f408-f5bc-4990-8a9d-fff15aa6c502"
+N8N_WEBHOOK_URL = "https://addo11111.app.n8n.cloud/webhook/amazon-scraper"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
