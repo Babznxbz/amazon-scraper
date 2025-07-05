@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 N8N_WEBHOOK_URL = "https://addo11111.app.n8n.cloud/webhook/amazon-scraper"
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=[ 'POST','GET'])
 def index():
     result = None
     if request.method == 'POST':
