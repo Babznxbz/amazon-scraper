@@ -4,19 +4,55 @@
   <meta charset="UTF-8">
   <title>Amazon Scraper</title>
   <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    input, button {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h2>Amazon Scraper (Frontend + n8n)</h2>
     <form method="POST">
       <input type="text" name="product_url" placeholder="Paste Amazon product/search/category URL" required>
-      <button type="submit">Scrape</button>
+      <button type="submit">🔍 Scrape</button>
     </form>
 
     {% if result %}
       <h3>Output:</h3>
-      <pre>{{ result | tojson(indent=2) }}</pre>
-      <a href="data:application/json,{{ result | tojson }}" download="product.json">⬇️ Download JSON</a>
+      {% if result.error %}
+        <div class="error">❌ {{ result.error }}</div>
+      {% else %}
+        {% if result.product_title %}
+          <h4>{{ result.product_title }}</h4>
+        {% endif %}
+        {% if result.images and result.images|length > 0 %}
+          <img src="{{ result.images[0] }}" alt="Product Image" style="max-width: 200px; border: 1px solid #ccc; margin-bottom: 10px;">
+        {% endif %}
+        <pre>{{ result | tojson(indent=2) }}</pre>
+        <a href="data:application/json,{{ result | tojson | urlencode }}" download="product-{{ result.uid if result.uid else 'result' }}.json">
+          ⬇️ Download JSON
+        </a>
+      {% endif %}
     {% endif %}
   </div>
 </body>
