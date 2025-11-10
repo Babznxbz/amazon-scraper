@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # ✅ Use production webhook URL (no "-test")
-N8N_WEBHOOK_URL = "http://localhost:5678/webhook-test/amazon-scraper"
+N8N_WEBHOOK_URL = "http://localhost:5678/webhook/amazon-scraper"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
